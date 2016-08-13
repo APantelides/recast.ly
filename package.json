@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "test": "live-server --open=./SpecRunner.html --port=8081",
-    "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash",
+    "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash | npm install -g babel-cli | babel . --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline | npm install -g live-server",
     "start": "babel . --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline -w | live-server" 
   },
   "dependencies": {
@@ -23,6 +23,6 @@
     "babel-preset-react": "^6.5.0",
     "chai": "^3.5.0",
     "mocha": "2.3.3",
-    "sinon": "^1.17.3"
+    "sinon": "^1.17.5"
   }
 }
