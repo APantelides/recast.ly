@@ -5,17 +5,30 @@ class App extends React.Component {
     this.state = {
       currentVideo: window.exampleVideoData[0],
       videoList: []
-    };
-    
-    props.searchYouTube({key: window.YOUTUBE_API_KEY,
+    }; 
+    // this.props.searchYouTube({key: window.YOUTUBE_API_KEY,
+    //   query: 'rick astley',
+    //   max: 5
+    // }, this.setVideoList.bind(this));
+  }
+
+  componentDidMount () {
+    this.props.searchYouTube({key: window.YOUTUBE_API_KEY,
       query: 'rick astley',
       max: 5
     }, this.setVideoList.bind(this));
+
   }
-  
+  // componentDidMount() {
+  //   this.setState({
+  //     currentVideo: this.state.videoList[0]
+  //   });
+  // }
+
   setVideoList (data) {
     this.setState({
-      videoList: data
+      videoList: data,
+      currentVideo: data[0]
     });
   }
 
