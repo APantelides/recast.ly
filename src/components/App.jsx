@@ -3,8 +3,20 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentVideo: window.exampleVideoData[0]
+      currentVideo: window.exampleVideoData[0],
+      videoList: []
     };
+    
+    props.searchYouTube({key: window.YOUTUBE_API_KEY,
+      query: 'rick astley',
+      max: 5
+    }, this.setVideoList.bind(this));
+  }
+  
+  setVideoList (data) {
+    this.setState({
+      videoList: data
+    });
   }
 
   titleClick(video) {
@@ -21,7 +33,7 @@ class App extends React.Component {
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList titleClick={this.titleClick.bind(this)} videos={window.exampleVideoData}/>
+          <VideoList titleClick={this.titleClick.bind(this)} videos={this.state.videoList}/>
         </div>
       </div>
     );
