@@ -6,30 +6,25 @@ class App extends React.Component {
       currentVideo: window.exampleVideoData[0],
       videoList: []
     }; 
-    // this.props.searchYouTube({key: window.YOUTUBE_API_KEY,
-    //   query: 'rick astley',
-    //   max: 5
-    // }, this.setVideoList.bind(this));
   }
 
   componentDidMount () {
-    this.props.searchYouTube({key: window.YOUTUBE_API_KEY,
-      query: 'rick astley',
-      max: 5
-    }, this.setVideoList.bind(this));
+    this.searchYouTube('rick astley');
 
   }
-  // componentDidMount() {
-  //   this.setState({
-  //     currentVideo: this.state.videoList[0]
-  //   });
-  // }
 
   setVideoList (data) {
     this.setState({
       videoList: data,
       currentVideo: data[0]
     });
+  }
+
+  searchYouTube (query, max = 5) {
+    this.props.searchYouTube({key: window.YOUTUBE_API_KEY,
+      query: query,
+      max: max
+    }, this.setVideoList.bind(this));
   }
 
   titleClick(video) {
@@ -41,7 +36,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Nav />
+        <Nav searchYouTube={this.searchYouTube.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
